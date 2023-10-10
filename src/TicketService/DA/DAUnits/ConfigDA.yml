@@ -1,0 +1,6 @@
+DB_HOST: "127.0.0.1"
+DB_NAME: "persons"
+DB_PORT: "5434"
+DB_Ticket: "postgres"
+DB_Ticket_PASSWORD: "postgres"
+LogFile: "log.log"
