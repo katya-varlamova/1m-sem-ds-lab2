@@ -23,7 +23,6 @@ CREATE TABLE flight
     price           INT                      NOT NULL
 );
 
-\c flights
 
 CREATE TABLE airport
 (
@@ -32,6 +31,14 @@ CREATE TABLE airport
     city    VARCHAR(255),
     country VARCHAR(255)
 );
+
+INSERT INTO airport (id, name, city, country) VALUES
+(1, 'Шереметьево', 'Москва', 'Россия'),
+(2, 'Пулково', 'Санкт-Петербург', 'Россия');
+
+INSERT INTO flight (id, flight_number,datetime, from_airport_id, to_airport_id, price) VALUES
+(1, 'AFL031', '2021-10-08 20:00', 2, 1, 1500);
+
 
 \c privileges
 CREATE TABLE privilege
