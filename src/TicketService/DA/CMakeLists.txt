@@ -1,5 +1,4 @@
 set (NEED_TESTS TRUE)
-add_subdirectory( DAUnits )
 
 set( PROJECT_NAME DA )
 project( ${PROJECT_NAME} CXX )
