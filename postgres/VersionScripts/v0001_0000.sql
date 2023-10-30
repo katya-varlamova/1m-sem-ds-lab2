@@ -11,6 +11,9 @@ CREATE TABLE ticket
         CHECK (status IN ('PAID', 'CANCELED'))
 );
 
+INSERT INTO ticket (id, ticket_uid ,username, flight_number, price, status) VALUES
+(1, '049161bb-badd-4fa8-9d90-87c9a82b0668', 'name', 'AFL031', 1500, 'PAID');
+
 \c flights
 
 CREATE TABLE flight
@@ -23,6 +26,10 @@ CREATE TABLE flight
     price           INT                      NOT NULL
 );
 
+INSERT INTO flight (id, flight_number, datetime, from_airport_id, to_airport_id, price) VALUES
+(1, 'AFL031', '2021-10-08 20:00', 2, 1, 1500);
+
+
 
 CREATE TABLE airport
 (
@@ -33,11 +40,10 @@ CREATE TABLE airport
 );
 
 INSERT INTO airport (id, name, city, country) VALUES
-(1, 'Шереметьево', 'Москва', 'Россия'),
+(1, 'Шереметьево', 'Москва', 'Россия');
+INSERT INTO airport (id, name, city, country) VALUES
 (2, 'Пулково', 'Санкт-Петербург', 'Россия');
 
-INSERT INTO flight (id, flight_number,datetime, from_airport_id, to_airport_id, price) VALUES
-(1, 'AFL031', '2021-10-08 20:00', 2, 1, 1500);
 
 
 \c privileges
@@ -49,6 +55,8 @@ CREATE TABLE privilege
         CHECK (status IN ('BRONZE', 'SILVER', 'GOLD')),
     balance  INT
 );
+INSERT INTO privilege (id, username,status, balance) VALUES
+(1, 'name', 'GOLD', 1500);
 
 CREATE TABLE privilege_history
 (
@@ -60,3 +68,10 @@ CREATE TABLE privilege_history
     operation_type VARCHAR(20) NOT NULL
         CHECK (operation_type IN ('FILL_IN_BALANCE', 'DEBIT_THE_ACCOUNT'))
 );
+
+INSERT INTO privilege_history (privilege_id, ticket_uid, datetime, balance_diff, operation_type) VALUES
+(1,
+ 'name',
+ '049161bb-badd-4fa8-9d90-87c9a82b0668',
+ '2021-10-08T19:59:19Z',
+ 1500);
