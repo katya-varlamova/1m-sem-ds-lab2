@@ -54,7 +54,7 @@ BalanceResponse PGBonusRepository::GetBalanceByUsername(const std::string &usern
         HistoryRecord record;
         for (int j = 0; j < PQnfields(pgRes); ++j) {
             char *fn = PQfname(pgRes, j);
-            char *val = PQgetvalue(pgRes, 0, j);
+            char *val = PQgetvalue(pgRes, i, j);
             res[std::string(fn)] = std::string(val);
         }
         record.ticketUid = res["ticket_uid"];
