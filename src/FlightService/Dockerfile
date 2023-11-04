@@ -1,6 +1,6 @@
 FROM katyavarlamova/ds-project as builder
 
-COPY ./ /src
+COPY ./FlightService /src 
 WORKDIR /src
 RUN mkdir build && cmake -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++-10 -S./ -B./build && \
     cd build && make

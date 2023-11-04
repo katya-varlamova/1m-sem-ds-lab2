@@ -32,7 +32,7 @@ jobs:
           docker-compose logs postgres
           sleep 5
           cd postgres
-          ./create-test-db.sh
+          chmod +x ./create-test-db.sh  && ./create-test-db.sh
           cd ..
 
       - name: Run containers
@@ -47,7 +47,7 @@ jobs:
           docker-compose logs flight-service
           docker-compose logs bonus-service
           docker-compose logs api-gateway
-          ./scripts/wait-script.sh
+          chmod +x ./scripts/wait-script.sh  && ./scripts/wait-script.sh
         env:
           WAIT_PORTS: 8080,8070,8060,8050
 
