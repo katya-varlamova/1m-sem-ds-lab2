@@ -136,6 +136,13 @@ public:
 
     };
 
+    ENDPOINT_ASYNC("GET", "/manage/health", HealthPoint ) {
+        ENDPOINT_ASYNC_INIT(HealthPoint)
+        Action act() override {
+            return _return(controller->createResponse(Status::CODE_200));
+        };
+    };
+
 };
 
 #include OATPP_CODEGEN_BEGIN(ApiController)"oatpp/codegen/ApiController_define.hpp"
