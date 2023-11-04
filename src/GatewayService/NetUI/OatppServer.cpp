@@ -4,7 +4,7 @@
 void OatppServer::run() {
     oatpp::base::Environment::init();
     AppComponent components(
-            {"0.0.0.0", 8000},
+            {"0.0.0.0", 8080},
             {"0.0.0.0", 8060},
             {"0.0.0.0", 8070},
             {"0.0.0.0", 8050}

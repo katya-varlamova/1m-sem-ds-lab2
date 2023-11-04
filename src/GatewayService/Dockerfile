@@ -8,4 +8,4 @@ RUN mkdir build && cmake -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_CXX_COMPILER:
 FROM katyavarlamova/ds-project
 
 COPY --from=builder /src/ /app
-ENTRYPOINT ["/app/build/main/main", "/app/Configs/ConfigGH.yaml"]
+ENTRYPOINT ["/app/build/main/main"]

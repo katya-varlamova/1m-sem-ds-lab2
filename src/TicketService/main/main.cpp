@@ -6,9 +6,9 @@
 #include "oatpp/core/macro/component.hpp"
 #include "BoostUUIDGenerator.h"
 int main(int argc, const char* argv[]) {
-//    if (argc < 2)
-//        return 1;
-    std::string CONFIG_PATH = "/Users/kate/Desktop/ds-lsb2/src/TicketService/Configs/Config.yml";//argv[1];
+    if (argc < 2)
+        return 1;
+    std::string CONFIG_PATH = argv[1]; // "/Users/kate/Desktop/ds-lsb2/src/TicketService/Configs/Config.yml"
 
     auto injector = di::make_injector(
             di::bind<BaseConfig>().to<YamlCppConfig>(),

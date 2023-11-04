@@ -1,5 +1,5 @@
 DB_HOST: "postgres"
-DB_NAME: "bonuss"
+DB_NAME: "privileges"
 DB_PORT: "5432"
 DB_USER: "postgres"
 DB_USER_PASSWORD: "postgres"
