@@ -63,11 +63,10 @@ public:
             }
 
             auto response = flightService->FlightsGetPoint(page, pageSize);
-            return _return(controller->createResponse(Status::CODE_200));
+
             if (response->getStatusCode() != 200)
             {
-                int st = response->getStatusCode();
-                return _return(controller->createResponse(Status::CODE_502));
+                return _return(controller->createResponse(Status::CODE_500));
             }
 
             auto flights = response->readBodyToDto<oatpp::Object<FlightsResponseDto>>(
