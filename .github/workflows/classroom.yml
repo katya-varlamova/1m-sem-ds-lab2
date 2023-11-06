@@ -59,6 +59,13 @@ jobs:
           delayRequest: 100
           reporters: '[ "cli" ]'
 
+      - name: Run Unit Tests
+        run: |
+          chmod +x ./create-test-db.sh  && ./create-test-db.sh
+          python3 src/TicketService/itests/itests.py
+          python3 src/FlightService/itests/itests.py
+          python3 src/BonusService/itests/itests.py
+
       - name: Stop containers
         if: always()
         continue-on-error: true

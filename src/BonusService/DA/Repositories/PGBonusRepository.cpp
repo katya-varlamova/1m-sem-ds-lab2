@@ -21,10 +21,12 @@ BalanceResponse PGBonusRepository::GetBalanceByUsername(const std::string &usern
     }
     BalanceResponse response;
     std::map<std::string, std::string> res;
-    for ( int j = 0; j < PQnfields( pgRes ); ++j ) {
-        char* fn = PQfname( pgRes, j );
-        char* val = PQgetvalue( pgRes, 0, j );
-        res[std::string( fn )] = std::string( val );
+    for ( int i = 0; i < PQntuples( pgRes ); ++i ) {
+        for (int j = 0; j < PQnfields(pgRes); ++j) {
+            char *fn = PQfname(pgRes, j);
+            char *val = PQgetvalue(pgRes, 0, j);
+            res[std::string(fn)] = std::string(val);
+        }
     }
     int id = std::stoi(res["id"]);
     response.status = res["status"];
@@ -92,10 +94,12 @@ BuyResponse PGBonusRepository::PerfromBuyOperation(const BuyRequest &request)
 
 
     std::map<std::string, std::string> res;
-    for ( int j = 0; j < PQnfields( pgRes ); ++j ) {
-        char* fn = PQfname( pgRes, j );
-        char* val = PQgetvalue( pgRes, 0, j );
-        res[std::string( fn )] = std::string( val );
+    for ( int i = 0; i < PQntuples( pgRes ); ++i ) {
+        for (int j = 0; j < PQnfields(pgRes); ++j) {
+            char *fn = PQfname(pgRes, j);
+            char *val = PQgetvalue(pgRes, 0, j);
+            res[std::string(fn)] = std::string(val);
+        }
     }
     int id = std::stoi(res["id"]);
     response.status = res["status"];

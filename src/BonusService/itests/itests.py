@@ -6,17 +6,17 @@ HOST="127.0.0.1"
 URL = "http://" + HOST + ":8050/api/v1"
 p1 = {"price" : 1500,
       "ticketUid" : "049161bb-badd-4fa8-9d90-87c9a82b0665",
-      "username" : "name",
+      "username" : "Test Max",
       "paidFromBalance" : True}
 
 p2 = {"price" : 1500,
       "ticketUid" : "049161bb-badd-4fa8-9d90-87c9a82b0666",
-      "username" : "name",
+      "username" : "Test Max",
       "paidFromBalance" : False}
 
 p3 = {"price" : 140,
       "ticketUid" : "049161bb-badd-4fa8-9d90-87c9a82b0667",
-      "username" : "name",
+      "username" : "Test Max",
       "paidFromBalance" : True}
 p1j = json.dumps(p1)
 p2j = json.dumps(p2)
@@ -27,7 +27,7 @@ class TestMain(unittest.TestCase):
   # positives
     
   def test_get_balance(self):
-    headers = {"X-User-Name" : "name"}
+    headers = {"X-User-Name" : "Test Max"}
     self.assertEqual(len(requests.get(URL + "/balance", headers=headers).json()) == 3, True)
      
   def test_do_purchase1(self):
@@ -40,13 +40,13 @@ class TestMain(unittest.TestCase):
     ans = requests.patch(URL + "/purchase", data=p3j).json()
     self.assertEqual(ans["balance"] == 10 and  ans["status"] == 'GOLD' and ans["paidByMoney"] == 0 and ans['paidByBonuses'] == 140, True)
 
-    headers = {"X-User-Name" : "name", "ticket_uid" : "049161bb-badd-4fa8-9d90-87c9a82b0666"}
+    headers = {"X-User-Name" : "Test Max", "ticket_uid" : "049161bb-badd-4fa8-9d90-87c9a82b0666"}
     self.assertEqual(requests.patch(URL + "/return", headers=headers).status_code == 200, True)
     
-    headers = {"X-User-Name" : "name", "ticket_uid" : "049161bb-badd-4fa8-9d90-87c9a82b0667"}
+    headers = {"X-User-Name" : "Test Max", "ticket_uid" : "049161bb-badd-4fa8-9d90-87c9a82b0667"}
     self.assertEqual(requests.patch(URL + "/return", headers=headers).status_code == 200, True)
     
-    headers = {"X-User-Name" : "name", "ticket_uid" : "049161bb-badd-4fa8-9d90-87c9a82b0665"}
+    headers = {"X-User-Name" : "Test Max", "ticket_uid" : "049161bb-badd-4fa8-9d90-87c9a82b0665"}
     self.assertEqual(requests.patch(URL + "/return", headers=headers).status_code == 200, True)
       
 if len(sys.argv) > 1:
