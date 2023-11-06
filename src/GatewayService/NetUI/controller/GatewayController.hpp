@@ -41,6 +41,7 @@ public:
     ENDPOINT_ASYNC_INIT(FlightsGetPoint)
 
         Action act() override {
+
             int page = std::stoi(request->getQueryParameter("page"));
             if (page < 1){
                 auto dto = ValidationErrorResponse::createShared();
@@ -50,6 +51,7 @@ public:
                 dto->errors = errors;
                 return _return(controller->createDtoResponse(Status::CODE_400, dto));
             }
+
             int pageSize = std::stoi(request->getQueryParameter("size"));
             if (pageSize < 1 || pageSize > 100){
                 auto dto = ValidationErrorResponse::createShared();
@@ -59,11 +61,15 @@ public:
                 dto->errors = errors;
                 return _return(controller->createDtoResponse(Status::CODE_400, dto));
             }
+
             auto response = flightService->FlightsGetPoint(page, pageSize);
+            return _return(controller->createResponse(Status::CODE_200));
             if (response->getStatusCode() != 200)
             {
-                return _return(controller->createResponse(Status::CODE_500));
+                int st = response->getStatusCode();
+                return _return(controller->createResponse(Status::CODE_502));
             }
+
             auto flights = response->readBodyToDto<oatpp::Object<FlightsResponseDto>>(
                     controller->getDefaultObjectMapper());
             return _return(controller->createDtoResponse(Status::CODE_200, flights));
